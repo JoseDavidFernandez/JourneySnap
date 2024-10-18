@@ -43,6 +43,15 @@ class ProfileController extends Controller
             'descripcion' => ['nullable', 'string', 'max:260'],
         ]);
 
+        // Eliminar la imagen de perfil si se solicita
+        if ($request->remove_image) {
+            // Eliminar la imagen existente si existe
+            if ($user->imagen_perfil) {
+                Storage::disk('public')->delete($user->imagen_perfil);
+                $user->imagen_perfil = null; // Asegúrate de que se elimine la ruta de la imagen en la base de datos
+            }
+        }
+
         // Actualizar la imagen de perfil si se proporciona una nueva
         if ($request->hasFile('imagen_perfil')) {
             $file = $request->file('imagen_perfil');
@@ -79,4 +88,5 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.index')->with('success', 'Perfil actualizado correctamente.');
     }
+
 }

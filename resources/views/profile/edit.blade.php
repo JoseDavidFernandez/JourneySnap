@@ -73,6 +73,10 @@
                             <br>
                             @if($user->imagen_perfil)
                                 <img src="{{ asset('storage/' . $user->imagen_perfil) }}" alt="Imagen Perfil" class="img-thumbnail mb-2" width="150">
+                                <div class="form-check">
+                                    <input type="checkbox" name="remove_image" id="remove_image" class="form-check-input">
+                                    <label for="remove_image" class="form-check-label">Eliminar imagen de perfil</label>
+                                </div>
                             @endif
                             <input type="file" name="imagen_perfil" id="imagen_perfil" class="form-control-file @error('imagen_perfil') is-invalid @enderror">
                             @error('imagen_perfil')
@@ -81,6 +85,7 @@
                                 </span>
                             @enderror
                         </div>
+
 
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
