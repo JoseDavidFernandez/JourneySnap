@@ -104,7 +104,7 @@
 
         const username = 'josedavidfc'; // Tu nombre de usuario de Geonames
 
-        fetch(`http://api.geonames.org/searchJSON?country=${countryCode}&featureClass=P&maxRows=1000&username=${username}`)
+        fetch(`https://secure.geonames.org/searchJSON?country=${countryCode}&featureClass=P&maxRows=1000&username=${username}`)
             .then(response => response.json())
             .then(data => {
                 data.geonames.forEach(city => {
