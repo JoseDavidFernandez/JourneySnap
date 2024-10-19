@@ -14,7 +14,8 @@
         "route:clear": "php artisan route:clear",
         "composer:install": "composer install",
         "composer:update": "composer update",
-        "artisan:tinker": "php artisan tinker"  
+        "artisan:tinker": "php artisan tinker",
+        "artisan storage:link" : "php artisan storage:link"  
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

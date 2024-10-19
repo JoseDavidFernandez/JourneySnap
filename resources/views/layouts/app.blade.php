@@ -49,13 +49,23 @@
                             </li>
                         @endif
                     @else
+                        <!-- Botón '+' para crear una publicación -->
+                        <li class="nav-item me-3">
+                            <a href="{{ route('posts.create') }}" class="bg-green-500 text-white px-3 py-2 rounded-full text-center flex items-center" title="Crear Publicación">
+                                <span class="text-lg font-bold">+</span>
+                            </a>
+                        </li>
+
                         <!-- Bloque: Imagen Perfil + Usuario -->
                         <li class="nav-item dropdown d-flex align-items-center">
                             <!-- Enlace a la página de perfil -->
                             <a href="{{ route('profile.index') }}" class="nav-link p-0 me-2" role="button" aria-haspopup="true" aria-expanded="false">
                                 <!-- Imagen Perfil -->
                                 <div class="rounded-full h-10 w-10 bg-white">
-                                    <img src="{{ asset('storage/' . Auth::user()->imagen_perfil) }}" alt="Imagen Perfil" class="rounded-full h-full w-full object-cover">
+                                    <img src="{{ Auth::user()->imagen_perfil 
+                                                ? asset('storage/' . Auth::user()->imagen_perfil) 
+                                                : asset('storage/icon.profile.png') }}" 
+                                         alt="Imagen Perfil" class="rounded-full h-full w-full object-cover">
                                 </div>
                             </a>
 

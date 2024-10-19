@@ -10,7 +10,10 @@
             <div class="flex flex-col">
                 <!-- Imagen de Perfil -->
                 <div class="rounded-lg h-96 w-96 bg-gray-200 flex-shrink-0 overflow-hidden mx-auto md:mx-0">
-                    <img src="{{ asset('storage/' . Auth::user()->imagen_perfil) }}" alt="Imagen Perfil" class="h-full w-full object-cover" />
+                    <img src="{{ Auth::user()->imagen_perfil 
+                                ? asset('storage/' . Auth::user()->imagen_perfil) 
+                                : asset('storage/icon.profile.png') }}" 
+                         alt="Imagen Perfil" class="h-full w-full object-cover" />
                 </div>
                 <!-- Descripción -->
                 <div class="bg-gray-200 bg-opacity-75 p-4 mt-4 rounded-lg mx-auto md:mx-0" style="width: 24rem;"> 
@@ -81,7 +84,10 @@
                             <div class="d-flex align-items-center mb-2">
                                 <!-- Imagen de Perfil del Usuario -->
                                 <div class="rounded-circle overflow-hidden" style="width: 48px; height: 48px;">
-                                    <img src="{{ asset('storage/' . $user->imagen_perfil) }}" alt="Imagen Perfil" class="img-fluid">
+                                    <img src="{{ $user->imagen_perfil 
+                                                ? asset('storage/' . $user->imagen_perfil) 
+                                                : asset('storage/icon.profile.png') }}" 
+                                         alt="Imagen Perfil" class="img-fluid">
                                 </div>
                                 <!-- Nombre Usuario -->
                                 <p class="mb-0 ml-3 text-dark font-weight-bold">{{ '@' . $user->username }}</p>
@@ -98,9 +104,6 @@
             @endforeach
         </div>
     </div>
-
-
-
 </div>
 
 <script>
