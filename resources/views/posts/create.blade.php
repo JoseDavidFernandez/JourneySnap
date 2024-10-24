@@ -50,7 +50,7 @@
 
                         <div class="form-group">
                             <label for="descripcion_post">Descripción:</label>
-                            <textarea name="descripcion_post" id="descripcion_post" class="form-control @error('descripcion_post') is-invalid @enderror" rows="3"></textarea>
+                            <textarea name="descripcion_post" id="descripcion_post" class="form-control @error('descripcion_post') is-invalid @enderror" rows="3" required></textarea>
                             @error('descripcion_post')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -67,7 +67,27 @@
                                 </span>
                             @enderror
                         </div>
-                        
+
+                        <div class="form-group">
+                            <label for="latitud">Latitud:</label>
+                            <input type="text" class="form-control @error('latitud') is-invalid @enderror" name="latitud" id="latitud" required>
+                            @error('latitud')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="longitud">Longitud:</label>
+                            <input type="text" class="form-control @error('longitud') is-invalid @enderror" name="longitud" id="longitud" required>
+                            @error('longitud')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary">Crear</button>
                         </div>
@@ -99,7 +119,7 @@
     function loadCities(countryCode) {
         const citySelect = document.getElementById('ciudad');
         citySelect.innerHTML = '<option value="">Selecciona una ciudad</option>';
-
+        
         if (!countryCode) return;
 
         const username = 'josedavidfc'; // Tu nombre de usuario de Geonames
@@ -113,6 +133,15 @@
                     option.textContent = city.name;
                     citySelect.appendChild(option);
                 });
+
+                // Agregar un evento para obtener latitud y longitud al seleccionar una ciudad
+                citySelect.onchange = function() {
+                    const selectedCity = data.geonames.find(c => c.name === citySelect.value);
+                    if (selectedCity) {
+                        document.getElementById('latitud').value = selectedCity.lat; // Asignar latitud
+                        document.getElementById('longitud').value = selectedCity.lng; // Asignar longitud
+                    }
+                };
             })
             .catch(error => console.error('Error fetching cities:', error));
     }

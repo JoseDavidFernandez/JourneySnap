@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserPostController;
+use App\Http\Controllers\CityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,13 @@ Route::middleware('auth')->group(function () {
     
     // Ruta adicional para UserPostController
     Route::get('/users/{userId}/posts/{postId}/attach', [UserPostController::class, 'attachPostToUser']);
+
+    // Rutas API (usar routes/api.php)
+    Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
+
+    // O, si prefieres usar web (routes/web.php)
+    Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
+
 });
 
 Route::get('/about', function () {return view('about');})->name('about');

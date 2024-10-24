@@ -23,4 +23,11 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Relación con la tabla UbicacionesPost
+    public function ubicaciones()
+    {
+        return $this->hasOne(UbicacionesPost::class, 'post_id');
+    }
+
 }

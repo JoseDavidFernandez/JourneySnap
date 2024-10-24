@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\UbicacionesPost; // Importar el modelo UbicacionesPost
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; // Agregar Log
 
 class PostController extends Controller
 {
@@ -34,6 +36,8 @@ class PostController extends Controller
             'ciudad' => 'required|string|max:255',
             'descripcion_post' => 'required|string|max:255',
             'fecha_publicacion' => 'required|date',
+            'latitud' => 'required|numeric', // Validación para latitud
+            'longitud' => 'required|numeric', // Validación para longitud
         ], [
             'imagen_post.required' => 'Por favor, sube una imagen.',
             'imagen_post.mimes' => 'El archivo debe ser una imagen de tipo jpeg, png, jpg, gif o svg.',
@@ -42,6 +46,8 @@ class PostController extends Controller
             'ciudad.required' => 'El campo ciudad es obligatorio.',
             'descripcion_post.required' => 'El campo descripción es obligatorio.',
             'fecha_publicacion.required' => 'El campo fecha de publicación es obligatorio.',
+            'latitud.required' => 'El campo latitud es obligatorio.',
+            'longitud.required' => 'El campo longitud es obligatorio.',
         ]);
 
         // Comprobar si la validación falla
@@ -77,6 +83,16 @@ class PostController extends Controller
 
         // Guardar el post
         $nuevoPost->save();
+
+        // Crear la entrada en la tabla UbicacionesPost
+        $ubicacionPost = new UbicacionesPost();
+        $ubicacionPost->pais = $request->pais;
+        $ubicacionPost->ciudad = $request->ciudad;
+        $ubicacionPost->latitud = $request->latitud;  // Asignar latitud
+        $ubicacionPost->longitud = $request->longitud;  // Asignar longitud
+        $ubicacionPost->user_id = $user->id; // Asignar el id del usuario
+        $ubicacionPost->post_id = $nuevoPost->id; // Asignar el id del post
+        $ubicacionPost->save(); // Guardar la ubicación
 
         return redirect()->back()->with('success', 'Post creado correctamente');
     }
