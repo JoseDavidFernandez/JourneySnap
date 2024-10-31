@@ -65,7 +65,7 @@
                                     <img src="{{ Auth::user()->imagen_perfil 
                                                 ? asset('storage/' . Auth::user()->imagen_perfil) 
                                                 : asset('storage/icon.profile.png') }}" 
-                                         alt="Imagen Perfil" class="rounded-full h-full w-full object-cover">
+                                        alt="Imagen Perfil" class="rounded-full h-full w-full object-cover">
                                 </div>
                             </a>
 

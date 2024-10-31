@@ -30,7 +30,9 @@ class HomeController extends Controller
         $user = Auth::user();
 
         // Obtener los posts del usuario autenticado
-        $posts = $user ? Post::where('user_id', $user->id)->get() : collect();
+        //$posts = $user ? Post::where('user_id', $user->id)->get() : collect();
+        $posts = Post::with('ubicaciones')->where('user_id', $user->id)->get();
+
 
         return view('home', compact('posts'));
     }

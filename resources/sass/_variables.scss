@@ -26,3 +26,80 @@ a{
 .text-white {
     color: $color-white;
 }
+
+/* Custom Styles for Card */
+.custom-card {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #737373;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.custom-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.custom-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.custom-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.custom-card-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.custom-card-button:hover {
+    background-color: #0056b3;
+}
+
+.custom-card-view-button {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 8px;
+    align-self: flex-start;
+}
+
+.custom-card-view-button:hover {
+    background-color: #218838;
+}
+
+.custom-card-date {
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    margin: 0;
+    align-self: flex-end;
+}

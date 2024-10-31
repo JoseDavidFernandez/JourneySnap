@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     
     // Rutas para PostController
     Route::resource('posts', PostController::class);
+    Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+
     
     // Ruta adicional para UserPostController
     Route::get('/users/{userId}/posts/{postId}/attach', [UserPostController::class, 'attachPostToUser']);
