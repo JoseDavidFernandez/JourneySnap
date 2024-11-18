@@ -30,4 +30,10 @@ class Post extends Model
         return $this->hasOne(UbicacionesPost::class, 'post_id');
     }
 
+    public function itinerario()
+    {
+        return $this->hasOne(Itinerario::class);  // O puede ser hasMany, dependiendo de tu estructura
+    }
+
+
 }

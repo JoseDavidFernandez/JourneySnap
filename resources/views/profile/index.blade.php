@@ -13,7 +13,7 @@
                     <img src="{{ Auth::user()->imagen_perfil 
                                 ? asset('storage/' . Auth::user()->imagen_perfil) 
                                 : asset('storage/icon.profile.png') }}" 
-                         alt="Imagen Perfil" class="h-full w-full object-cover" />
+                        alt="Imagen Perfil" class="h-full w-full object-cover" />
                 </div>
                 <!-- Descripción -->
                 <div class="bg-gray-200 bg-opacity-75 p-4 mt-4 rounded-lg mx-auto md:mx-0" style="width: 24rem;"> 
@@ -67,43 +67,27 @@
     </div>
 
     <!-- Bloques Publicaciones -->
-    <div class="container pt-5">
+    <div class="container pt-5" id="bloquePost">
         <div class="row justify-content-center">
             @foreach($posts as $post)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
-                        <!-- Imagen Publicacion -->
-                        @if($post->imagen_post)
-                            <div class="overflow-hidden" style="height: 300px;">
-                                <img src="{{ asset('storage/' . $post->imagen_post) }}" alt="Imagen del post" class="card-img-top" style="height: 100%; width: 100%; object-fit: contain;">
-                            </div>
-                        @endif
-                        <!-- Informacion Publicacion -->
-                        <div class="card-body d-flex flex-column">
-                            <!-- Información Usuario -->
-                            <div class="d-flex align-items-center mb-2">
-                                <!-- Imagen de Perfil del Usuario -->
-                                <div class="rounded-circle overflow-hidden" style="width: 48px; height: 48px;">
-                                    <img src="{{ $user->imagen_perfil 
-                                                ? asset('storage/' . $user->imagen_perfil) 
-                                                : asset('storage/icon.profile.png') }}" 
-                                         alt="Imagen Perfil" class="img-fluid">
-                                </div>
-                                <!-- Nombre Usuario -->
-                                <p class="mb-0 ml-3 text-dark font-weight-bold">{{ '@' . $user->username }}</p>
-                            </div>
-                            <!-- Ubicacion Publicacion -->
-                            <p class="text-muted small mb-1">{{ $post->pais }}, {{ $post->ciudad }}</p>
-                            <!-- Descripcion Publicacion -->
-                            <p class="text-dark">{{ $post->descripcion_post }}</p>
-                            <!-- Fecha Publicacion -->
-                            <p class="text-muted small mt-auto">{{ $post->fecha_publicacion }}</p>
+                    <div class="custom-card">
+                        <div class="custom-card-img">
+                            @if($post->imagen_post)
+                                <img src="{{ asset('storage/' . $post->imagen_post) }}" alt="Imagen del post">
+                            @endif
+                        </div>
+                        <div class="custom-card-overlay">
+                            <h2 class="custom-card-title">{{ $post->ciudad }}</h2>
+                            <a href="{{ route('posts.show', $post->id) }}" class="custom-card-button">Ver Post</a>                            
+                            <p class="custom-card-date">{{ $post->fecha_publicacion }}</p>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+    <!-- end Bloques Publicaciones -->
 </div>
 
 <script>

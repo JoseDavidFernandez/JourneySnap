@@ -7,10 +7,11 @@ use App\Models\Post;
 use App\Models\UbicacionesPost; // Importar el modelo UbicacionesPost
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log; // Agregar Log
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
+    
     public function index()
     {
         // Obtener el usuario autenticado
@@ -22,6 +23,12 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    public function show($id)
+    {
+        $post = Post::with('itinerario')->findOrFail($id); 
+        return view('posts.show', compact('post'));
+    }
+
     public function create()
     {
         return view('posts.create');
@@ -31,13 +38,12 @@ class PostController extends Controller
     {
         // Validar la solicitud manualmente con mensajes personalizados
         $validator = Validator::make($request->all(), [
-            'imagen_post' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:5120', // Ajustar el tamaño máximo a 5 MB (5120 KB)
+            'imagen_post' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'pais' => 'required|string|max:255',
             'ciudad' => 'required|string|max:255',
             'descripcion_post' => 'required|string|max:255',
-            'fecha_publicacion' => 'required|date',
-            'latitud' => 'required|numeric', // Validación para latitud
-            'longitud' => 'required|numeric', // Validación para longitud
+            'latitud' => 'required|numeric',
+            'longitud' => 'required|numeric',
         ], [
             'imagen_post.required' => 'Por favor, sube una imagen.',
             'imagen_post.mimes' => 'El archivo debe ser una imagen de tipo jpeg, png, jpg, gif o svg.',
@@ -45,19 +51,16 @@ class PostController extends Controller
             'pais.required' => 'El campo país es obligatorio.',
             'ciudad.required' => 'El campo ciudad es obligatorio.',
             'descripcion_post.required' => 'El campo descripción es obligatorio.',
-            'fecha_publicacion.required' => 'El campo fecha de publicación es obligatorio.',
             'latitud.required' => 'El campo latitud es obligatorio.',
             'longitud.required' => 'El campo longitud es obligatorio.',
         ]);
 
-        // Comprobar si la validación falla
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        // Obtener el usuario autenticado
         $user = Auth::user();
 
         // Crear un nuevo post
@@ -72,28 +75,32 @@ class PostController extends Controller
             $nuevoPost->imagen_post = $rutaArchivo;
         }
 
-        // Asignar los demás campos del post
         $nuevoPost->pais = $request->pais;
         $nuevoPost->ciudad = $request->ciudad;
         $nuevoPost->descripcion_post = $request->descripcion_post;
-        $nuevoPost->fecha_publicacion = $request->fecha_publicacion;
+        $nuevoPost->fecha_publicacion = now(); // Asigna la fecha y hora actual
 
-        // Asignar el id del usuario al post
         $nuevoPost->user_id = $user->id;
-
-        // Guardar el post
         $nuevoPost->save();
 
-        // Crear la entrada en la tabla UbicacionesPost
         $ubicacionPost = new UbicacionesPost();
         $ubicacionPost->pais = $request->pais;
         $ubicacionPost->ciudad = $request->ciudad;
-        $ubicacionPost->latitud = $request->latitud;  // Asignar latitud
-        $ubicacionPost->longitud = $request->longitud;  // Asignar longitud
-        $ubicacionPost->user_id = $user->id; // Asignar el id del usuario
-        $ubicacionPost->post_id = $nuevoPost->id; // Asignar el id del post
-        $ubicacionPost->save(); // Guardar la ubicación
+        $ubicacionPost->latitud = $request->latitud;
+        $ubicacionPost->longitud = $request->longitud;
+        $ubicacionPost->user_id = $user->id;
+        $ubicacionPost->post_id = $nuevoPost->id;
+        $ubicacionPost->save();
 
-        return redirect()->back()->with('success', 'Post creado correctamente');
+        // Verificar si se seleccionó la opción de crear un itinerario
+        if ($request->has('add_itinerary') && $request->input('add_itinerary') == 1) {
+            return redirect()->route('itinerarios.create', ['postId' => $nuevoPost->id]); // Pasar el ID del post al crear itinerario
+        }
+
+
+        return redirect()->route('profile.index')->with('success', 'Post creado correctamente');
+
     }
+
+
 }

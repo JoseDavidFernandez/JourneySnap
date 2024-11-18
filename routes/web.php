@@ -8,6 +8,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\ItinerarioController;
+
+
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
-    
+
     // Ruta adicional para UserPostController
     Route::get('/users/{userId}/posts/{postId}/attach', [UserPostController::class, 'attachPostToUser']);
 
@@ -56,7 +60,14 @@ Route::middleware('auth')->group(function () {
     // O, si prefieres usar web (routes/web.php)
     Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
 
+    // Rutas para Itinerarios
+    Route::get('itinerarios/create/{postId}', [ItinerarioController::class, 'create'])->name('itinerarios.create');
+    Route::post('itinerarios/store/{postId}', [ItinerarioController::class, 'store'])->name('itinerarios.store');
+    Route::get('/itinerarios/{id}', [ItinerarioController::class, 'show'])->name('itinerarios.show');
+    Route::get('/itinerarios', [ItinerarioController::class, 'index'])->name('itinerarios.index');
+
 });
+
 
 Route::get('/about', function () {return view('about');})->name('about');
 

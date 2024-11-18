@@ -48,8 +48,8 @@
                         <!-- Fecha de Nacimiento -->
                         <div class="form-group">
                             <label for="birthdate">Fecha de Nacimiento:</label>
-                            <input type="date" name="birthdate" id="birthdate" value="{{ $user->fecha_nacimiento }}" class="form-control @error('birthdate') is-invalid @enderror">
-                            @error('birthdate')
+                            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ $user->fecha_nacimiento }}" class="form-control @error('fecha_nacimiento') is-invalid @enderror">
+                            @error('fecha_nacimiento')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -58,9 +58,9 @@
 
                         <!-- Descripcion -->
                         <div class="form-group">
-                            <label for="description">Descripción:</label>
-                            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" rows="3">{{ $user->descripcion }}</textarea>
-                            @error('description')
+                            <label for="descripcion">Descripción:</label>
+                            <textarea name="descripcion" id="descripcion" class="form-control @error('descripcion') is-invalid @enderror" rows="3">{{ $user->descripcion }}</textarea>
+                            @error('descripcion')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

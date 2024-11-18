@@ -92,6 +92,11 @@
                             <button type="submit" class="btn btn-primary">Crear</button>
                         </div>
 
+                        <div class="form-group">
+                            <label for="add_itinerary">¿Añadir itinerario?</label>
+                            <input type="checkbox" name="add_itinerary" id="add_itinerary" value="1">
+                        </div>
+
                     </form>
                 </div>
             </div>

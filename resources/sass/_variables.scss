@@ -1,6 +1,9 @@
 // Body
 $body-bg: #ffffff;
 
+
+
+
 // Typography
 //$font-family-sans-serif: 'Nunito', sans-serif;
 $font-family-sans-serif: 'Inter', sans-serif;
@@ -102,4 +105,18 @@ a{
     color: #e0e0e0;
     margin: 0;
     align-self: flex-end;
+}
+
+/* ITINERARIOS */
+.itinerario h4 {
+    color: #0d6efd;
+}
+
+.itinerario p {
+    line-height: 1.6;
+}
+
+.carousel img {
+    max-height: 400px;
+    object-fit: cover;
 }
