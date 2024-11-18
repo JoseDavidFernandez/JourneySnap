@@ -14,8 +14,8 @@ class CreateUbicacionesPostTable extends Migration
             $table->string('ciudad');
             $table->decimal('latitud', 10, 8); // 10 dígitos, 8 después del punto decimal
             $table->decimal('longitud', 11, 8); // 11 dígitos, 8 después del punto decimal
-            $table->unsignedBigInteger('user_id'); // ID del usuario
-            $table->unsignedBigInteger('post_id'); // ID del post
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('post_id');
             $table->timestamps();
 
             // Claves foráneas

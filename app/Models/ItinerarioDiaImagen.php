@@ -9,10 +9,9 @@ class ItinerarioDiaImagen extends Model
 {
     use HasFactory;
 
-    // En el modelo ItinerarioDiaImagen.php
     protected $table = 'itinerarios_dias_imagenes';
     
-    protected $fillable = ['itinerario_dia_id', 'path']; // Campos rellenables
+    protected $fillable = ['itinerario_dia_id', 'path'];
 
     public function dia()
     {

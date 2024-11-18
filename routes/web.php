@@ -13,16 +13,6 @@ use App\Http\Controllers\ItinerarioController;
 
 use App\Http\Controllers\BlogController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Esta línea es opcional y depende de tu configuración de entorno
 URL::forceScheme('http');
@@ -39,8 +29,10 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
-// Rutas para ProfileController con middleware de autenticación
+// con middleware de autenticación
 Route::middleware('auth')->group(function () {
+    
+    // Rutas para ProfileController 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -50,21 +42,20 @@ Route::middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
-
     // Ruta adicional para UserPostController
     Route::get('/users/{userId}/posts/{postId}/attach', [UserPostController::class, 'attachPostToUser']);
-
-    // Rutas API (usar routes/api.php)
-    Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
-
-    // O, si prefieres usar web (routes/web.php)
-    Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
 
     // Rutas para Itinerarios
     Route::get('itinerarios/create/{postId}', [ItinerarioController::class, 'create'])->name('itinerarios.create');
     Route::post('itinerarios/store/{postId}', [ItinerarioController::class, 'store'])->name('itinerarios.store');
     Route::get('/itinerarios/{id}', [ItinerarioController::class, 'show'])->name('itinerarios.show');
     Route::get('/itinerarios', [ItinerarioController::class, 'index'])->name('itinerarios.index');
+
+    // Rutas API (usar routes/api.php)
+    Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
+
+    // O, si prefieres usar web (routes/web.php)
+    Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
 
 });
 

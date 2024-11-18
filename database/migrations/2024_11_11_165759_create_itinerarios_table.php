@@ -14,7 +14,7 @@ return new class extends Migration
             $table->text('descripcion');
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('google_maps_url')->nullable(); // URL de Google Maps
+            $table->string('google_maps_url')->nullable();
             $table->timestamps();
         });
     }

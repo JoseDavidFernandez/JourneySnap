@@ -15,16 +15,14 @@ class Post extends Model
         'ciudad',
         'descripcion_post',
         'fecha_publicacion',
-        'user_id', // Añadir user_id a los fillable
+        'user_id',
     ];
 
-    // Definir la relación con el usuario que creó el post
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relación con la tabla UbicacionesPost
     public function ubicaciones()
     {
         return $this->hasOne(UbicacionesPost::class, 'post_id');
@@ -32,7 +30,7 @@ class Post extends Model
 
     public function itinerario()
     {
-        return $this->hasOne(Itinerario::class);  // O puede ser hasMany, dependiendo de tu estructura
+        return $this->hasOne(Itinerario::class);  
     }
 
 

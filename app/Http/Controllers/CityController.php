@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\OpenCageService; // Asegúrate de importar el servicio
+use App\Services\OpenCageService;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -12,7 +12,7 @@ class CityController extends Controller
     // Inyección del servicio a través del constructor
     public function __construct(OpenCageService $openCageService)
     {
-        $this->openCageService = $openCageService; // Asignar el servicio a una propiedad
+        $this->openCageService = $openCageService;
     }
 
     // Método para obtener coordenadas

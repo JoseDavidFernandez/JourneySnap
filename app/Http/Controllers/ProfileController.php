@@ -45,10 +45,9 @@ class ProfileController extends Controller
 
         // Eliminar la imagen de perfil si se solicita
         if ($request->remove_image) {
-            // Eliminar la imagen existente si existe
             if ($user->imagen_perfil) {
                 Storage::disk('public')->delete($user->imagen_perfil);
-                $user->imagen_perfil = null; // Asegúrate de que se elimine la ruta de la imagen en la base de datos
+                $user->imagen_perfil = null;
             }
         }
 
@@ -77,8 +76,8 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->username = $request->username;
-        $user->fecha_nacimiento = $request->fecha_nacimiento; // Asegúrate de que el nombre del campo coincida
-        $user->descripcion = $request->descripcion; // Asegúrate de que el nombre del campo coincida
+        $user->fecha_nacimiento = $request->fecha_nacimiento;
+        $user->descripcion = $request->descripcion;
 
         if ($request->password) {
             $user->password = Hash::make($request->password);

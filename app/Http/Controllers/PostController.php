@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\UbicacionesPost; // Importar el modelo UbicacionesPost
+use App\Models\UbicacionesPost;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -78,8 +78,7 @@ class PostController extends Controller
         $nuevoPost->pais = $request->pais;
         $nuevoPost->ciudad = $request->ciudad;
         $nuevoPost->descripcion_post = $request->descripcion_post;
-        $nuevoPost->fecha_publicacion = now(); // Asigna la fecha y hora actual
-
+        $nuevoPost->fecha_publicacion = now(); 
         $nuevoPost->user_id = $user->id;
         $nuevoPost->save();
 
@@ -94,7 +93,7 @@ class PostController extends Controller
 
         // Verificar si se seleccionó la opción de crear un itinerario
         if ($request->has('add_itinerary') && $request->input('add_itinerary') == 1) {
-            return redirect()->route('itinerarios.create', ['postId' => $nuevoPost->id]); // Pasar el ID del post al crear itinerario
+            return redirect()->route('itinerarios.create', ['postId' => $nuevoPost->id]); 
         }
 
 

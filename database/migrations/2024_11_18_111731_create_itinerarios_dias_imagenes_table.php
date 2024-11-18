@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('itinerarios_dias_imagenes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('itinerario_dia_id')->constrained('itinerarios_dias')->onDelete('cascade'); // Relación con ItinerarioDia
-            $table->string('path'); // Ruta de la imagen
+            $table->string('path');
             $table->timestamps();
         });
     }

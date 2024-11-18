@@ -14,7 +14,7 @@ class ItinerarioController extends Controller
 {
     public function index()
     {
-        $itinerarios = Itinerario::with('dias')->get(); // Incluye días asociados
+        $itinerarios = Itinerario::with('dias')->get();
         return view('itinerarios.index', compact('itinerarios'));
     }
 
@@ -63,19 +63,17 @@ class ItinerarioController extends Controller
             // Ahora que el día tiene un ID, guardamos las imágenes asociadas
             if (!empty($dia['imagenes'])) {
                 foreach ($dia['imagenes'] as $imagen) {
-                    // Crear la ruta para almacenar la imagen dentro de una carpeta con el ID del usuario y el nombre del itinerario
                     $rutaDirectorio = 'ImagenesItinerario/' . Auth::id() . '/' . $itinerarioCiudad;
                     
-                    // Crear el directorio si no existe
                     Storage::makeDirectory($rutaDirectorio);
                     
-                    // Almacenar la imagen en la ruta especificada
+                    // Almacenar la imagen en la ruta
                     $nombreOriginal = $imagen->getClientOriginalName();
                     $path = $imagen->storeAs($rutaDirectorio, $nombreOriginal, 'public');
                     
                     // Guardar la imagen en la base de datos
                     $itinerarioDiaImagen = new ItinerarioDiaImagen();
-                    $itinerarioDiaImagen->itinerario_dia_id = $itinerarioDia->id; // Usamos el ID del día
+                    $itinerarioDiaImagen->itinerario_dia_id = $itinerarioDia->id;
                     $itinerarioDiaImagen->path = $path;
                     $itinerarioDiaImagen->save();
                 }
