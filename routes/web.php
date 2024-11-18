@@ -45,17 +45,17 @@ Route::middleware('auth')->group(function () {
     // Ruta adicional para UserPostController
     Route::get('/users/{userId}/posts/{postId}/attach', [UserPostController::class, 'attachPostToUser']);
 
-    // Rutas para Itinerarios
-    Route::get('itinerarios/create/{postId}', [ItinerarioController::class, 'create'])->name('itinerarios.create');
-    Route::post('itinerarios/store/{postId}', [ItinerarioController::class, 'store'])->name('itinerarios.store');
-    Route::get('/itinerarios/{id}', [ItinerarioController::class, 'show'])->name('itinerarios.show');
-    Route::get('/itinerarios', [ItinerarioController::class, 'index'])->name('itinerarios.index');
-
     // Rutas API (usar routes/api.php)
     Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
 
     // O, si prefieres usar web (routes/web.php)
     Route::get('/get-coordinates', [CityController::class, 'getCoordinates']);
+
+    // Rutas para Itinerarios
+    Route::get('itinerarios/create/{postId}', [ItinerarioController::class, 'create'])->name('itinerarios.create');
+    Route::post('itinerarios/store/{postId}', [ItinerarioController::class, 'store'])->name('itinerarios.store');
+    Route::get('/itinerarios/{id}', [ItinerarioController::class, 'show'])->name('itinerarios.show');
+    Route::get('/itinerarios', [ItinerarioController::class, 'index'])->name('itinerarios.index');
 
 });
 

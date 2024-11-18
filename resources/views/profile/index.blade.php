@@ -39,8 +39,8 @@
                     <p class="text-2xl font-bold">{{ $posts->pluck('pais')->unique()->count() }}</p>
                 </div>
                 <div class="flex flex-col items-center mb-4 md:mb-0">
-                    <p class="text-lg font-semibold">Mis Publicaciones</p>
-                    <p class="text-2xl font-bold">{{ count($posts) }}</p>
+                    <p class="text-lg font-semibold">Mis Itinerarios</p>
+                    <p class="text-2xl font-bold">{{ $itinerariosCount }}</p>
                 </div>
                 <div class="flex flex-col items-center mb-4 md:mb-0">
                     <p class="text-lg font-semibold">Ciudades</p>

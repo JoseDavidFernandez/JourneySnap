@@ -58,9 +58,10 @@
                             @enderror
                         </div>
 
+                        <!-- Fecha automática -->
                         <div class="form-group">
                             <label for="fecha_publicacion">Fecha de Publicación:</label>
-                            <input type="date" class="form-control @error('fecha_publicacion') is-invalid @enderror" name="fecha_publicacion" id="fecha_publicacion" required>
+                            <input type="date" class="form-control @error('fecha_publicacion') is-invalid @enderror" name="fecha_publicacion" id="fecha_publicacion" value="{{ now()->format('Y-m-d') }}" required>
                             @error('fecha_publicacion')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -68,9 +69,10 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        <!-- Latitud y Longitud ocultos -->
+                        <div class="form-group" style="display:none;">
                             <label for="latitud">Latitud:</label>
-                            <input type="text" class="form-control @error('latitud') is-invalid @enderror" name="latitud" id="latitud" required>
+                            <input type="text" class="form-control @error('latitud') is-invalid @enderror" name="latitud" id="latitud" readonly>
                             @error('latitud')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -78,9 +80,9 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" style="display:none;">
                             <label for="longitud">Longitud:</label>
-                            <input type="text" class="form-control @error('longitud') is-invalid @enderror" name="longitud" id="longitud" required>
+                            <input type="text" class="form-control @error('longitud') is-invalid @enderror" name="longitud" id="longitud" readonly>
                             @error('longitud')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

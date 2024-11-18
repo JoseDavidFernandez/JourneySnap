@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Itinerario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -16,11 +17,18 @@ class ProfileController extends Controller
         // Obtener el usuario autenticado
         $user = Auth::user();
 
+        //Obtener todos los post del usuario y sus itinerarios relacionados
+        $posts = $user->posts()->with('itinerario')->get();
+        // Contar la cantidad de itinerarios relacionados con los posts
+        $itinerariosCount = $posts->filter(function($post) {
+            return $post->itinerario != null;  // Filtrar solo los posts que tienen itinerario
+        })->count();
+
         // Obtener los posts del usuario autenticado
         $posts = Post::where('user_id', $user->id)->get();
 
         // Retornar la vista con los datos del usuario y sus posts
-        return view('profile.index', compact('user', 'posts'));
+        return view('profile.index', compact('user', 'posts', 'itinerariosCount'));
     }
 
     public function edit()
