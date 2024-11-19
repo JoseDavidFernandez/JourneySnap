@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Itinerario;
+use App\Models\ItinerarioDia;
+use App\Models\ItinerarioDiaImagen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -24,11 +26,14 @@ class ProfileController extends Controller
             return $post->itinerario != null;  // Filtrar solo los posts que tienen itinerario
         })->count();
 
+        $itinerarios = Itinerario::with('dias')->get();
+
+
         // Obtener los posts del usuario autenticado
         $posts = Post::where('user_id', $user->id)->get();
 
         // Retornar la vista con los datos del usuario y sus posts
-        return view('profile.index', compact('user', 'posts', 'itinerariosCount'));
+        return view('profile.index', compact('user', 'posts', 'itinerarios',  'itinerariosCount'));
     }
 
     public function edit()
