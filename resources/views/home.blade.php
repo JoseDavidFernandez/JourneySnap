@@ -104,10 +104,52 @@
     </div>
 
     <!-- Bloque Blog/Itinerarios-->
-    <h3>Bloque Blog/Itinerarios</h3>
     <div class="container pt-5">
-        
+        <h2 class="text-2xl font-bold text-center mb-8 text-gray-800">Explora Nuestros Itinerarios</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            @foreach($itinerarios as $itinerario)
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 max-w-md w-full">
+                    <!-- Ciudad y País -->
+                    <div class="p-4 bg-gray-100">
+                        <h3 class="text-xl text-gray-700 text-center font-semibold">{{ $itinerario->nombre }}</h3>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4">{{ Str::limit($itinerario->descripcion, 80) }}</p>
+
+                        @if($itinerario->dias->count() > 0)
+                            <h4 class="text-gray-700 font-medium mb-2">Días destacados:</h4>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                @foreach($itinerario->dias->take(3) as $dia)
+                                    <li>Día {{ $dia->numero_dia }}: {{ Str::limit($dia->descripcion, 50) }}</li>
+                                @endforeach
+                                @if($itinerario->dias->count() > 3)
+                                    <li class="text-blue-500">Y más...</li>
+                                @endif
+                            </ul>
+                        @endif
+                    </div>
+
+                    <!-- Botón Ver más -->
+                    <div class="p-4 text-center border-t border-gray-200">
+                        <a href="{{ route('itinerarios.show', $itinerario->id) }}" class="inline-block bg-black text-white px-6 py-2 rounded-lg shadow-md hover:bg-white hover:text-black hover:shadow-lg transition-colors duration-300">
+                            Ver detalles &rarr;
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <!-- Botón para ver todos los itinerarios -->
+        <div class="text-center mt-8">
+            <a href="{{ route('itinerarios.index') }}" class="inline-block bg-gray-800 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-gray-600 hover:shadow-xl transition-colors duration-300">
+                Ver todos los itinerarios
+            </a>
+        </div>
     </div>
+
+
+
 
 </div>
 
