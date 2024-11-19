@@ -101,5 +101,52 @@ class PostController extends Controller
 
     }
 
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id);
+
+        // Verificar que el usuario sea el propietario del post
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'No tienes permiso para editar este post.');
+        }
+
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+
+        // Verificar que el usuario sea el propietario del post
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'No tienes permiso para actualizar este post.');
+        }
+
+        // Validar solo la descripción
+        $request->validate([
+            'descripcion_post' => 'required|string|max:255',
+        ]);
+
+        $post->descripcion_post = $request->descripcion_post;
+        $post->save();
+
+        return redirect()->route('posts.show', $post->id)->with('success', 'Post actualizado correctamente.');
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'No tienes permiso para eliminar este post.');
+        }
+
+        $post->delete();
+
+        return redirect()->route('profile.index')->with('success', 'Post eliminado correctamente');
+    }
+
+
+
 
 }

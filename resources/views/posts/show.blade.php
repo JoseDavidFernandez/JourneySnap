@@ -79,6 +79,25 @@
             &larr; Volver a todas las publicaciones
         </a>
     </div>
+
+    <div class="flex space-x-4 mt-4">
+        <!-- Botón Editar -->
+        <a href="{{ route('posts.edit', $post->id) }}" 
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Editar Post
+        </a>
+        
+        <!-- Botón Borrar -->
+        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este post?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" 
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Borrar Post
+            </button>
+        </form>
+    </div>
+
 </div>
 
 @endsection

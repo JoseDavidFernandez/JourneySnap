@@ -82,4 +82,70 @@ class ItinerarioController extends Controller
     
         return redirect()->route('posts.index')->with('success', 'Itinerario creado y asociado al post.');
     }
+
+    public function edit($id)
+    {
+        $itinerario = Itinerario::with('dias.imagenes')->findOrFail($id);
+        return view('itinerarios.edit', compact('itinerario'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'dias' => 'required|array',
+        ]);
+
+        // Actualizar el itinerario
+        $itinerario = Itinerario::findOrFail($id);
+        $itinerario->nombre = $request->nombre;
+        $itinerario->descripcion = $request->descripcion;
+        $itinerario->save();
+
+        // Actualizar los días del itinerario
+        foreach ($request->dias as $index => $dia) {
+            $itinerarioDia = ItinerarioDia::findOrFail($dia['id']);
+            $itinerarioDia->descripcion = $dia['descripcion'];
+            $itinerarioDia->save();
+
+            // Actualizar las imágenes (si hay nuevas)
+            if (!empty($dia['imagenes'])) {
+                foreach ($dia['imagenes'] as $imagen) {
+                    $rutaDirectorio = 'ImagenesItinerario/' . Auth::id() . '/' . str_replace(' ', '_', strtolower($itinerario->nombre));
+                    Storage::makeDirectory($rutaDirectorio);
+                    $path = $imagen->storeAs($rutaDirectorio, $imagen->getClientOriginalName(), 'public');
+
+                    $itinerarioDiaImagen = new ItinerarioDiaImagen();
+                    $itinerarioDiaImagen->itinerario_dia_id = $itinerarioDia->id;
+                    $itinerarioDiaImagen->path = $path;
+                    $itinerarioDiaImagen->save();
+                }
+            }
+        }
+
+        return redirect()->route('itinerarios.show', $id)->with('success', 'Itinerario actualizado correctamente.');
+    }
+
+    public function destroy($id)
+    {
+        $itinerario = Itinerario::findOrFail($id);
+
+        // Eliminar imágenes y carpetas asociadas
+        foreach ($itinerario->dias as $dia) {
+            foreach ($dia->imagenes as $imagen) {
+                Storage::delete('public/' . $imagen->path);
+                $imagen->delete();
+            }
+            $dia->delete();
+        }
+
+        // Eliminar el itinerario
+        $itinerario->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Itinerario eliminado correctamente.');
+    }
+
+
+
 }

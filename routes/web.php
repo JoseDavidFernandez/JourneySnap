@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function () {
     // Rutas para PostController
     Route::resource('posts', PostController::class);
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+
 
     // Ruta adicional para UserPostController
     Route::get('/users/{userId}/posts/{postId}/attach', [UserPostController::class, 'attachPostToUser']);
@@ -56,6 +59,17 @@ Route::middleware('auth')->group(function () {
     Route::post('itinerarios/store/{postId}', [ItinerarioController::class, 'store'])->name('itinerarios.store');
     Route::get('/itinerarios/{id}', [ItinerarioController::class, 'show'])->name('itinerarios.show');
     Route::get('/itinerarios', [ItinerarioController::class, 'index'])->name('itinerarios.index');
+
+        // Ruta para mostrar el formulario de edición
+    Route::get('itinerarios/edit/{id}', [ItinerarioController::class, 'edit'])->name('itinerarios.edit');
+
+    // Ruta para actualizar un itinerario
+    Route::put('itinerarios/update/{id}', [ItinerarioController::class, 'update'])->name('itinerarios.update');
+
+    // Ruta para eliminar un itinerario
+    Route::delete('itinerarios/delete/{id}', [ItinerarioController::class, 'destroy'])->name('itinerarios.destroy');
+
+
 
 });
 

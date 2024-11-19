@@ -55,5 +55,17 @@
         </div>
         @endforeach
     </div>
+
+    <!-- Botones de acciones -->
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{{ route('itinerarios.edit', $itinerario->id) }}" class="btn btn-warning me-2">Editar Itinerario</a>
+
+        <form action="{{ route('itinerarios.destroy', $itinerario->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este itinerario?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Eliminar Itinerario</button>
+        </form>
+    </div>
+
 </div>
 @endsection
