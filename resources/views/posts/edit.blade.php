@@ -1,23 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Editar Publicación</div>
 
-<div class="container max-w-4xl mx-auto py-6">
-    <h1 class="text-2xl font-bold mb-4">Editar publicación</h1>
-    <form action="{{ route('posts.update', $post->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+                <div class="card-body">
+                    <form action="{{ route('posts.update', $post->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-        <div class="mb-4">
-            <label for="descripcion_post" class="block text-gray-700 font-medium mb-2">Descripción:</label>
-            <textarea name="descripcion_post" id="descripcion_post" class="form-control w-full p-2 border border-gray-300 rounded" rows="5" required>{{ old('descripcion_post', $post->descripcion_post) }}</textarea>
-            @error('descripcion_post')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
+                        <!-- Campo para la descripción -->
+                        <div class="form-group">
+                            <label for="descripcion_post">Descripción:</label>
+                            <textarea name="descripcion_post" id="descripcion_post" class="form-control @error('descripcion_post') is-invalid @enderror" rows="5" required>{{ old('descripcion_post', $post->descripcion_post) }}</textarea>
+                            @error('descripcion_post')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <!-- Botón para actualizar -->
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-    </form>
+    </div>
 </div>
-
 @endsection

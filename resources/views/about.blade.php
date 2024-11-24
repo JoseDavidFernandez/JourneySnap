@@ -31,4 +31,24 @@
 
         ¡Bienvenido a JourneySnap, donde el mundo se convierte en un álbum de recuerdos!
     </div>
+
+        
+    <!-- Nuevo Bloque con Imagen y Texto -->
+    <h3>Lorem ipsum dolor sit amet</h3>
+    <div class="container pt-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4">
+                <img src="storage/img-prueba-home.png" alt="Imagen" class="img-fluid" style="max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex flex-column justify-content-center h-100">
+                    <p>JourneySnap es una plataforma única pensada para quienes desean preservar y compartir cada detalle de sus aventuras alrededor del mundo. Aquí, tu viaje se convierte en una historia visual que nunca perderás de vista, capturada en imágenes y anécdotas que son parte esencial de cada experiencia. En JourneySnap, cada destino cobra vida en un mapa que cuenta la historia de tus viajes, acumulando recuerdos mientras descubres el mundo y marcas cada ciudad y país en un registro visual y geográfico.</p>
+
+                    <p>Viajar no solo es llegar a un destino; es coleccionar momentos y, en JourneySnap, te ayudamos a preservar cada uno. La plataforma permite almacenar tus publicaciones con facilidad: una foto, una ubicación y una descripción, dándote la oportunidad de documentar cada aventura en una interfaz intuitiva y diseñada para el viajero moderno. Cada publicación se suma a un mapa personal y privado que visualiza los lugares visitados, contabiliza las ciudades y países alcanzados, y te motiva a continuar descubriendo para completar el 100% del mundo.</p>
+
+                    <p>Ya sea que busques recordar cada rincón de tus viajes o te inspires en la comunidad para encontrar tu próximo destino, JourneySnap es tu compañero ideal para dar vida a cada momento, grande o pequeño, y dejarlo plasmado en un mapa único que refleja tus pasos en el mundo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -21,6 +21,9 @@
     <!-- Estilos Leaflet API Maps  -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -31,7 +34,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm headerprincipal">
             <div class="container d-flex justify-content-between">
                 <!-- Logo -->
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand logo" href="{{ url('/home') }}">
                     {{ config('app.name', 'JourneySnap') }}
                 </a>
 
@@ -70,7 +73,7 @@
                                 </div>
                             </a>
 
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ '@' . Auth::user()->username }}
                             </a>
 

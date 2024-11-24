@@ -26,25 +26,25 @@
         <!-- Columna Derecha: Información del Usuario -->
         <div class="flex flex-col items-center justify-center text-center w-full">
             <!-- Subtitulo de Bienvenida -->
-            <h3 class="text-lg mb-2">Hello!</h3>
+            <h3 class="text-lg mb-2 title-blue-light">Bienvenido!</h3>
             <!-- Nombre del Usuario -->
-            <h2 class="text-4xl font-bold mb-2">{{ Auth::user()->name }}</h2>
+            <h2 class="text-4xl font-bold mb-2 title-blue-light">{{ Auth::user()->name }}</h2>
             <!-- Username del Usuario -->
-            <p class="text-xl mb-4">Username: {{ '@' . Auth::user()->username }}</p>
+            <p class="text-xl mb-4 title-blue-light">Username: {{ '@' . Auth::user()->username }}</p>
             
             <!-- Sección de Estadísticas -->
             <div class="w-full d-flex flex-column flex-md-row justify-content-between mb-6 text-center">
                 <div class="flex flex-col items-center mb-4 md:mb-0">
-                    <p class="text-lg font-semibold">Países Visitados</p>
-                    <p class="text-2xl font-bold">{{ $posts->pluck('pais')->unique()->count() }}</p>
+                    <p class="text-lg font-semibold title-blue-light">Países Visitados</p>
+                    <p class="text-2xl font-bold title-blue-light">{{ $posts->pluck('pais')->unique()->count() }}</p>
                 </div>
                 <div class="flex flex-col items-center mb-4 md:mb-0">
-                    <p class="text-lg font-semibold">Mis Itinerarios</p>
-                    <p class="text-2xl font-bold">{{ $itinerariosCount }}</p>
+                    <p class="text-lg font-semibold title-blue-light">Mis Itinerarios</p>
+                    <p class="text-2xl font-bold title-blue-light">{{ $itinerariosCount }}</p>
                 </div>
                 <div class="flex flex-col items-center mb-4 md:mb-0">
-                    <p class="text-lg font-semibold">Ciudades</p>
-                    <p class="text-2xl font-bold">{{ $posts->pluck('ciudad')->unique()->count() }}</p>
+                    <p class="text-lg font-semibold title-blue-light">Ciudades</p>
+                    <p class="text-2xl font-bold title-blue-light">{{ $posts->pluck('ciudad')->unique()->count() }}</p>
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
             
             <!-- Botones de Acción -->
             <div class="flex flex-col md:flex-row gap-4">
-                <a href="{{ route('posts.create') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg text-center">Subir Publicacion</a>
+            <a href="{{ route('posts.create') }}" class="btn-primary">Subir Publicacion</a>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
 
     <!-- Bloques Itinerarios -->
     <div class="container pt-5" id="bloqueItinerario">
-        <h2 class="text-2xl font-bold mb-8 text-gray-800">Explora Nuestros Itinerarios</h2>
+        <h2 class="text-2xl font-bold mb-8 text-gray-800 title-blue-light">Explora Nuestros Itinerarios</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             @foreach($itinerarios as $itinerario)
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 max-w-md w-full">

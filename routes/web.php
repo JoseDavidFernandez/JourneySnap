@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ItinerarioController;
+use App\Http\Controllers\AdminController;
 
 
 use App\Http\Controllers\BlogController;
@@ -29,9 +30,17 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
+// ADMINISTRADOR
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+});
+
+
+
+
 // con middleware de autenticación
 Route::middleware('auth')->group(function () {
-    
     // Rutas para ProfileController 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

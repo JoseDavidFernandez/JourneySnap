@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container max-w-6xl mx-auto py-6">
-    <h1 class="text-4xl font-bold text-gray-800 mb-6">Todos los Itinerarios</h1>
+    <h1 class="text-4xl font-bold text-gray-800 mb-6 title-blue-light">Todos los Itinerarios</h1>
 
     <!-- Listado de Itinerarios -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">

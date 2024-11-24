@@ -14,9 +14,12 @@ class ItinerarioController extends Controller
 {
     public function index()
     {
-        $itinerarios = Itinerario::with('dias')->get();
+        $user = Auth::user();
+
+        $itinerarios = Itinerario::where('user_id', $user->id)->get();
         return view('itinerarios.index', compact('itinerarios'));
     }
+
 
     public function show($id)
     {
@@ -80,7 +83,7 @@ class ItinerarioController extends Controller
             }
         }
     
-        return redirect()->route('posts.index')->with('success', 'Itinerario creado y asociado al post.');
+        return redirect()->route('itinerarios.index')->with('success', 'Itinerario creado y asociado al post.');
     }
 
     public function edit($id)

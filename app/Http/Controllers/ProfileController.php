@@ -26,7 +26,8 @@ class ProfileController extends Controller
             return $post->itinerario != null;  // Filtrar solo los posts que tienen itinerario
         })->count();
 
-        $itinerarios = Itinerario::with('dias')->get();
+        $itinerarios = Itinerario::with('dias')->where('user_id', $user->id)->get();
+
 
 
         // Obtener los posts del usuario autenticado

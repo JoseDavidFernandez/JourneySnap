@@ -4,12 +4,12 @@
 <div class="container py-5">
     <!-- Título del Itinerario -->
     <div class="text-center mb-4">
-        <h1 class="fw-bold">{{ $itinerario->nombre }}</h1>
+        <h1 class="fw-bold title-blue-light">{{ $itinerario->nombre }}</h1>
     </div>
 
     <!-- Descripción del Itinerario -->
     <div class="text-center mb-5">
-        <p class="text-muted fs-5">{{ $itinerario->descripcion }}</p>
+        <p class="text-white fs-5 ">{{ $itinerario->descripcion }}</p>
     </div>
 
     <!-- Días del Itinerario -->
@@ -19,7 +19,7 @@
             <!-- Descripción del Día -->
             <div class="col-md-6">
                 <h4 class="fw-bold mb-3">Día {{ $loop->iteration }}</h4>
-                <p class="text-dark">{{ $dia->descripcion }}</p>
+                <p class="text-white">{{ $dia->descripcion }}</p>
 
                 @if (!empty($dia->url))
                 <p class="mt-3">
@@ -49,7 +49,7 @@
                     </button>
                 </div>
                 @else
-                <p class="text-muted">No hay imágenes para este día.</p>
+                <p class="text-white">No hay imágenes para este día.</p>
                 @endif
             </div>
         </div>

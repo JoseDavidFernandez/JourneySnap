@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-
 class RegisterController extends Controller
 {
     use RegistersUsers;
@@ -17,10 +16,16 @@ class RegisterController extends Controller
 
     public function __construct()
     {
-        // Elimina esta línea
-        // $this->middleware('guest');
+        // Elimina esta línea si quieres que los usuarios no autenticados puedan acceder
+        //$this->middleware('guest');
     }
 
+    /**
+     * Obtener un validador para una solicitud de registro entrante.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -34,9 +39,14 @@ class RegisterController extends Controller
         ]);
     }
 
+    /**
+     * Crear un nuevo usuario después de la validación.
+     *
+     * @param  array  $data
+     * @return \App\Models\User
+     */
     protected function create(array $data)
     {
-        // Crear el usuario
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -50,18 +60,11 @@ class RegisterController extends Controller
         // Manejar la subida de la imagen de perfil después de que el usuario se haya creado
         if (request()->hasFile('imagen_perfil')) {
             $file = request()->file('imagen_perfil');
-            // Obtener el ID del usuario recién creado
             $userId = $user->id;
-            // Crear la ruta de almacenamiento con el ID del usuario
             $path = $file->storeAs('ImagenPerfil/' . $userId, $file->getClientOriginalName(), 'public');
-            // Actualizar el campo 'imagen_perfil' en el usuario recién creado
             $user->update(['imagen_perfil' => $path]);
         }
 
         return $user;
     }
-
-
-
-
 }
